@@ -19,6 +19,7 @@ MEAL_CATEGORY = "category"
 MIN_TIME_BETWEEN_UPDATES = timedelta(minutes=5)
 CONST_NAME = "name"
 CONST_MEALS = "meals"
+CONST_PRICES = "prices"
 STATE_ONLINE = "online"
 STATE_NO_MEALS = "no_meals"
 
@@ -66,7 +67,7 @@ class OpenmensaSensor(Entity):
                 if category is None:
                     category = {CONST_NAME: meal[MEAL_CATEGORY], CONST_MEALS: []}
                     categories.append(category)
-                category[CONST_MEALS].append({CONST_NAME: meal[CONST_NAME]})
+                category[CONST_MEALS].append({CONST_NAME: meal[CONST_NAME], CONST_PRICES: meal[CONST_PRICES]})
         except HTTPError:
             self._state = STATE_NO_MEALS
 
